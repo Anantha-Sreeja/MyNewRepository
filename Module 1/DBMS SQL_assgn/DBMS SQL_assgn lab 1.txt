@@ -1,0 +1,57 @@
+QUERY1.1
+1 SOL:
+SQL> SELECT staff_name, design_code FROM staff_master WHERE Hiredate<'1-jan-2003' AND staff_sal BETWEEN '12000' AND '25000';
+
+STAFF_NAME                                         DESIGN_CODE
+-------------------------------------------------- -----------
+Akshay                                                      10
+2 SOL:
+SELECT sysdate
+  2  FROM dual
+  3  ;
+
+SYSDATE
+---------
+24-JAN-20
+ SELECT staff_name, staff_code, Dept_code
+  2  FROM staff_Master
+  3  WHERE sysdate-hiredate>18;
+
+STAFF_NAME                                         STAFF_CODE DEPT_CODE
+-------------------------------------------------- ---------- -----------
+kapil                                                    	1        30
+sreeja                                                   	2        20
+vinay                                                  	3        10
+
+3 SOL:
+SQL> SELECT staff_name, staff_code, Design_code
+  2  FROM staff_Master
+  3  WHERE Mgr_code is null;
+
+STAFF_NAME                                         STAFF_CODE DESIGN_CODE
+-------------------------------------------------- ---------- -----------
+supraja                                                    10          12
+
+4 SOL:
+SELECT Book_code, Book_name, Book_pub_author
+  2  FROM Book_transactions
+  3  WHERE Book_pub_year between '2001' and '2004' and Book_name like '%&%';
+
+ BOOK_CODE
+----------
+BOOK_NAME
+--------------------------------------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+        10
+HVE&
+VK MEHTA
+
+5 SOL:
+SELECT staff_name
+  2  FROM staff_Master
+  3   WHERE staff_name like '%\_%' escape '\';
+
+STAFF_NAME
+--------------------------------------------------
+sree_a

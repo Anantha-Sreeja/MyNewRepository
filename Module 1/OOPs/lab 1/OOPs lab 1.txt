@@ -1,0 +1,24 @@
+1.1-SOL
+1.ANS:
+ Account Holder
+ Email System
+Cur_ ICENTURIAN
+Sav_ ICENTURIAN.
+2.ANS:
+It interacts with account holder and server as interface.
+3.ANS:
+4.ANS:
+Login
+Active destination account
+Create destination account
+Transfer funds
+Request address change
+View account details
+View statements
+View account summary
+5.ANS:
+Create destination account extends account transfer funds.
+
+1.2-SOL
+ Yes, Discrete Mathematics is a Class. Since, it has several sections in it. It is a blue print of 
+  Graph theory. It is also a sub-class of the class University. It defines the behaviour and state of the objects in it.

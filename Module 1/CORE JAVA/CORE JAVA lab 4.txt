@@ -1,0 +1,148 @@
+4.1 SOL:
+package VJIT;
+import java.util.Scanner;
+	class Account 
+	{
+		private long accnum;
+		private double balance=500;
+		private String name;
+		private float age;
+
+		@Override
+		public String toString() {
+			return "Account [accnum=" + accnum + ", balance=" + balance + ", name=" + name + ", age=" + age
+					+ ", getAccnum()=" + getAccnum() + ", getBalance()=" + getBalance() + ", getName()=" + getName()
+					+ ", getAge()=" + getAge() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+					+ ", toString()=" + super.toString() + "]";
+		}
+		
+		public Account() {
+			
+		
+		}
+		public Account(long accnum,String name,float age)
+		{
+			this.accnum = accnum;
+			this.name = name;
+			this.age = age;
+		}
+		
+		public long getAccnum() 
+		{
+			return accnum;
+		}
+		public void setAccnum(long accnum) 
+		{
+			this.accnum = accnum;
+		}
+		public double getBalance() 
+		{
+			return balance;
+		}
+		public void setBalance(double balance) 
+		{
+			this.balance = balance;
+		}
+		public String getName() 
+		{
+			return name;
+		}
+		public void setName(String name) 
+		{
+			this.name = name;
+		}
+		public float getAge() 
+		{
+			return age;
+		}
+		public void setAge(float age) {
+			this.age = age;
+		}
+		public void deposit(double depositamount)
+		{
+		    balance=balance+depositamount;
+		}
+		public void withdraw(double withdrawamount) 
+		{
+		    balance=balance-withdrawamount;	
+		}
+		public void balance() 
+		{
+			System.out.println("Available balance : ");
+		}
+	}
+	public class BankPerson extends Account
+	{
+		BankPerson(long accnum,String name,float age)
+		   {
+			super(accnum,name,age);
+	       }
+		public static void main(String[] args)
+		{
+			
+			BankPerson p = new BankPerson(6940,"Smith",21);
+			p.deposit(2000);
+			p.withdraw(2000);
+			p.getBalance();
+			System.out.println("Account holder name is " + p.getName());
+			System.out.println("Account number is " + p.getAccnum());
+			System.out.println("Balance is " + p.getBalance());
+			System.out.println("Age is " + p.getAge());
+			BankPerson p1 = new BankPerson(6113,"Kathy",22);
+			p1.deposit(3000);
+			p1.withdraw(2000);
+			p1.getBalance();
+			System.out.println("Account holder name is " + p1.getName());
+			System.out.println("Account number is " + p1.getAccnum());
+			System.out.println("Balance is " + p1.getBalance());
+			System.out.println("Age is " + p1.getAge());
+			
+			}
+	}
+
+OUTPUT:
+Account holder name is Smith
+Account number is 6940
+Balance is 500.0
+Age is 21.0
+Account holder name is Kathy
+Account number is 6113
+Balance is 1500.0
+Age is 22.0
+--------------------------------------------------------------------------------------------------------------------------------------------
+4.2 SOL:
+class SavingsAccount extends Account{
+	final int minimumbalance=500;
+	public void withdraw(double withdraw) {
+	    if(minimumbalance>=500)
+	    {
+	    	System.out.println("You can withdraw the amount");
+	    }
+	}
+	}
+class CurrentAccount extends Account{
+	    boolean flag=true;
+	    int bal;
+	    public void withdraw(double withdraw) {
+		if(bal<=0) {
+		System.out.println(""+flag);
+		}
+		else
+		System.out.println(""+!flag);
+	}
+}
+public class AccountType {
+
+
+	public static void main(String[] args) {
+		SavingsAccount s=new SavingsAccount();
+	CurrentAccount c=new CurrentAccount();
+		s.withdraw(300);
+		c.withdraw(0);
+	}
+	}
+
+OUTPUT:
+You can withdraw the amount
+true
+

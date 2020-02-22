@@ -1,0 +1,178 @@
+QUERIES 2.1
+1 SOL:
+SQL> SELECT dept_code, lpad(AVG(staff_sal), 15, '$') as Salary FROM staff_master GROUP BY dept_code ;
+
+ DEPT_CODE SALARY
+---------- ------------------------------------------------------------
+         6 $$$$$$$$$$45000
+         4 $$$$$$$$$$60000
+2 SOL:
+SQL>  select student_name, to_char(student_dob,'month dd yyyy')
+  2     as student_dob from student_master where
+  3     to_char(student_dob,'day') like ('%saturday%') or
+  4    to_char(student_dob,'day')like('%sunday%');
+
+STUDENT_NAME
+--------------------------------------------------
+STUDENT_DOB
+--------------------------------------------
+Sathya
+january   26 2020
+
+3 SOL:
+SQL>  create table staff_details(
+  2     staff_name varchar(25),
+  3     months_worked number(20),
+  4     id number(5));
+
+Table created.
+
+SQL>  insert into staff_details values('sravani', 8, 2);
+
+1 row created.
+
+SQL>  insert into staff_details values('Anjana', 3, 3);
+
+1 row created.
+
+SQL>  insert into staff_details values('Shresta', 12, 4);
+
+1 row created.
+
+SQL> select staff_name, months_worked from staff_details order by months_worked asc;
+
+STAFF_NAME                MONTHS_WORKED
+------------------------- -------------
+Anjana                                3
+sravani                               8
+Shresta                              12
+
+4 SOL:
+
+SQL> insert into staff_master(staff_name, staff_code, staff_address, design_code, hiredate) values ('Anshu', 2, 'Hyderabad', 3, ('26-dec-2019'));
+
+1 row created.
+
+SQL> insert into staff_master(staff_name, staff_code, staff_address, design_code, hiredate) values ('Snigdha', 4, 'Mumbai', 5, ('09-dec-2019'));
+
+1 row created.
+
+SQL> select staff_name, staff_code, staff_address, design_code, dept_code from staff_master where to_char(hiredate, 'mon')='dec'
+  2     and to_number(to_char(hiredate, 'dd'))<=15;
+
+STAFF_NAME                                         STAFF_CODE
+-------------------------------------------------- ----------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+DESIGN_CODE  DEPT_CODE
+----------- ----------
+Snigdha                                                     4
+Mumbai
+          5
+
+5 SOL:
+SQL> select staff_name, Staff_Sal, CASE
+  2     when staff_sal>=50000 then 'A'
+  3     when staff_sal>=25000 and staff_sal<50000 then 'B'
+  4     when staff_sal>=10000 and staff_sal<25000 then 'C'
+  5     ELSE
+  6     'D'
+  7     end case from staff_master;
+
+STAFF_NAME                                          STAFF_SAL C
+-------------------------------------------------- ---------- -
+Nishith                                                 60000 A
+Sathya                                                  45000 B
+Anshu                                                         D
+Snigdha                                                       D
+6 SOL:
+SQL> select staff_name,HireDate, to_char(hiredate,'dy') as "day" from staff_Master order by to_char(hiredate,'d');
+
+STAFF_NAME                                         HIREDATE  day
+-------------------------------------------------- --------- ------------
+Snigdha                                            09-DEC-19 mon
+Anshu                                              26-DEC-19 thu
+
+7 SOL:
+SQL> select instr('mississippi','i', 1,3) from dual;
+
+INSTR('MISSISSIPPI','I',1,3)
+----------------------------
+                           8
+8 SOL:
+SQL> SELECT TO_CHAR(NEXT_DAY(
+  2           LAST_DAY(SYSDATE) - INTERVAL '7' DAY,
+  3           'FRIDAY'
+  4         ),'ddthsp "of"  Month,YYYY') AS PAY_DATE FROM DUAL;
+
+PAY_DATE
+------------------------------------------------------------
+thirty-first of  January  ,2020
+9 SOL:
+SQL>  create table stu(
+  2      student_name varchar(50),
+  3      student_code number(5),
+  4      dept_code number(10));
+
+Table created.
+
+SQL> insert into stu values('sandya', 1, 10);
+
+1 row created.
+
+SQL> insert into stu values('kavya', 2, 30);
+
+1 row created.
+
+SQL> insert into stu values('Bavya', 3, 30);
+
+1 row created.
+
+SQL> insert into stu values('Muni', 4, 20);
+
+1 row created.
+SQL> select student_name, student_code, decode(dept_code,20,'electricals',30,'electronics', 'others') from stu;
+
+STUDENT_NAME                                       STUDENT_CODE DECODE(DEPT
+-------------------------------------------------- ------------ -----------
+sandya                                                        1 others
+kavya                                                         2 electronics
+Bavya                                                         3 electronics
+Muni                                                          4 electricals
+QUERY 2.2
+1
+SQL> select dept_code, avg(staff_sal), min(staff_sal), max(staff_sal)from staff_master group by dept_code having avg(staff_sal)>10;
+
+ DEPT_CODE AVG(STAFF_SAL) MIN(STAFF_SAL) MAX(STAFF_SAL)
+---------- -------------- -------------- --------------
+         6           9000           9000           9000
+        20         200000         200000         200000
+         8           5000           5000           5000
+         7          80000          80000          80000
+        10          50000          50000          50000
+        19           9000           9000           9000
+         9          46000           2000          90000
+
+7 rows selected.
+2
+SQL> 
+  1* select dept_code, sum(total_number_of_managers) as "Total Number of Managers" from dept1 group by dept_code
+SQL> /
+
+ DEPT_CODE Total Number of Managers
+---------- ------------------------
+         1                       13
+         6                       38
+         4                       47
+         8                       35
+3
+SQL> select dept_code, sum(staff_sal) from staff_master group by dept_code having avg(staff_sal) >30000;
+
+ DEPT_CODE SUM(STAFF_SAL)
+---------- --------------
+        20         200000
+         7          80000
+        10          50000
+         9         125000
+        12          40000
+

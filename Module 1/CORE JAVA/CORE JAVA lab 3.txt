@@ -1,0 +1,231 @@
+3.1 SOL:
+
+public class Add_string 
+{
+	 public static void main(String args[])
+	 {  
+		   String s1="sreeja";
+		  
+		   String s2=s1.concat(s1);  
+		   System.out.println(s2);  
+		
+		   {
+			   
+			   for (int i=0; i < s2.length(); i++)
+			      {
+			        if (i % 2 != 0)
+                           {
+			   s2 = s2.substring(0,i-1) + "#" + s2.substring(i,s2.length());
+			        }
+			      }
+			      System.out.println(s2);
+	       }
+		
+		   {
+			   char[] mask = new char[256];
+			   
+		   for (int j = 0; j < s2.length(); j++) 
+		    
+			   mask[s2.charAt(j)]++;
+		   
+		   for (int j = 0; j < s1.length(); j++) 
+		 	  {
+		    if (mask[s1.charAt(j)] == 0)
+		     System.out.print(s1.charAt(j));
+		      }
+		   }
+		   System.out.println("\n"); 
+		for (int i= 0; i<s1.length(); i++)
+			{
+				
+				int a= i%2;
+				
+				if (a == 0)
+				
+					System.out.print(Character.toLowerCase(s1.charAt(a)));
+					else
+					System.out.print(Character.toUpperCase(s1.charAt(a)));
+			}
+			
+		   
+		   }
+				
+
+}
+
+OUTPUT:
+sreejasreeja
+#r#e#a#r#e#a
+sj
+sRsRsR
+-----------------------------------------------------------------------------------------------------------------------
+3.2 SOL:
+public class Order 
+{
+	static boolean isAlphabaticOrder(String a) 
+	{  
+	        int n = a.length(); 
+	  
+	        for (int i = 1; i < n; i++) 
+	        {  
+	            if (a.charAt(i) < a.charAt(i - 1))
+	            { 
+	                return false; 
+	            } 
+	        } 
+	  
+	        return true; 
+	} 
+	public static void main(String args[]) 
+	{ 
+		String a = "effort"; 
+		if (isAlphabaticOrder(a)) 
+		{
+		System.out.println("Positive");
+		}
+		else
+		{
+		System.out.println("Negative");
+		}
+	}  
+} 
+
+OUTPUT:
+Positive
+3.3 SOL:
+import java.time.*;
+import java.util.*;
+
+public class Diff {  
+   public static void main(String[] args)
+    {
+        LocalDate pdate = LocalDate.of(2020, 01, 01);
+        LocalDate now = LocalDate.now();
+ 
+        Period diff = Period.between(pdate, now);
+ 
+     System.out.printf("\nDifference is %d years, %d months and %d days \n\n", 
+                    diff.getYears(), diff.getMonths(), diff.getDays());
+  }
+}
+OUTPUT:
+
+Difference is 0 years, 0 months and 29 days
+--------------------------------------------------------------------------------------------------------------------------------
+3.4 SOL:
+
+import java.time.*;
+import java.util.*;
+
+public class Diff {  
+   public static void main(String[] args)
+    {
+        LocalDate pdate = LocalDate.of(2019, 01, 01);
+        LocalDate p1date = LocalDate.of(2020, 04, 24);
+ 
+        Period diff = Period.between(pdate, p1date);
+ 
+     System.out.printf("\nDifference is %d years, %d months and %d days \n\n", 
+                    diff.getYears(), diff.getMonths(), diff.getDays());
+  }
+}
+OUTPUT:
+Difference is 1 years, 3 months and 23 days
+-----------------------------------------------------------------------------------------------------------------------------------
+3.5 SOL:
+import java.time.*;
+public class Warranty 
+{
+	public static void main(String[] args)
+	{
+    LocalDate pdate = LocalDate.of(2019, 01, 01);
+    System.out.printf("Purchase Date %d - %s\n",pdate.getYear(), pdate.getMonth());
+    LocalDate p1date = LocalDate.of(2020, 04, 24 );	
+    System.out.printf("The warranty period will expire on %d - %s\n",p1date.getYear(), p1date.getMonth());
+    Period diff = Period.between(pdate, p1date);
+    System.out.printf("Warranty period of this product is %d years, %d months\n", diff.getYears(), diff.getMonths());
+	}
+}
+
+
+OUTPUT:
+
+ Purchase Date 2019 - JANUARY
+The warranty period will expire on 2020 - APRIL
+Warranty period of this product is 1 years, 3 months
+-------------------------------------------------------------------------------------------------------------------------------------
+3.6 SOL:
+import java.time.*;
+public class Zone 
+{
+
+    public static void main(String[] args)
+    {
+
+        ZoneId zone1 = ZoneId.of("Asia/Karachi");
+        LocalTime now=LocalTime.now(zone1);
+        LocalDate now1=LocalDate.now(zone1);
+        System.out.println("Asia/Karachi");
+        System.out.println(now);
+        System.out.println(now1);
+        ZoneId zone2 = ZoneId.of("America/New_York");
+        LocalTime now2=LocalTime.now(zone2);
+        LocalDate now3=LocalDate.now(zone2);
+        System.out.println("America/New_York");
+        System.out.println(now2);
+        System.out.println(now3);
+  
+    }
+
+}
+
+OUTPUT:
+Asia/Karachi
+09:07:42.814
+2020-01-31
+America/New_York
+23:07:42.817
+2020-01-30
+-----------------------------------------------------------------------------------------------------------------------------------
+3.7 SOL:
+import java.time.LocalDate;
+import java.time.Period;
+
+public class calculateage 
+{
+		String firstname;
+		String lastname;
+		char gender;
+		short age;
+public static void main(String[] args)
+{
+	LocalDate pdate = LocalDate.of(2000,03, 8);
+	LocalDate now=LocalDate.now();
+	Period diff = Period.between(pdate, now);
+    System.out.printf("\nDifference is %d years, %d months,%d days\n", diff.getYears(), diff.getMonths(), diff.getDays());
+   
+    Person p1 = new Person();
+    System.out.println("Person Details");
+    System.out.println("Full Name : "+p1.getFirstname()+p1.getLastname());
+    System.out.println("First Name : "+p1.getFirstname());
+    System.out.println("Last Name :"+p1.getLastname());
+    System.out.println("Gender :"+p1.getGender());
+    Person p2 = new Person("Sreevally","Goud",'f', 20);
+    System.out.println("First Name : "+p2.getFirstname());
+    System.out.println("Last Name :"+p2.getLastname());
+    System.out.println("Gender :"+p2.getGender());
+}
+}
+
+OUTPUT:
+Difference is 19 years, 10 months,23 days
+Person Details
+Full Name : SreejaAnantha
+First Name : Sreeja
+Last Name :Anantha
+Gender :f
+First Name : Sreevally
+Last Name :Goud
+Gender :f
+
+

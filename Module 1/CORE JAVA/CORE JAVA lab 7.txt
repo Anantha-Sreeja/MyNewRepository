@@ -1,0 +1,49 @@
+7.1 SOL:
+
+import java.util.Arrays;
+import java.util.*;
+public class Product 
+{
+	public static void main(String[] args)
+	{
+		String a[]= {"Clothes","Facewash","Bracelet","Apple phones"};
+			Arrays.sort(a);
+			System.out.println("sorted array is \n"
+			+Arrays.toString(a));
+	}
+}
+
+OUTPUT:
+sorted array is 
+[Apple phones, Bracelet, Clothes, Facewash]
+-----------------------------------------------------------------------------------------------------
+7.2 SOL:
+import java.util.ArrayList;
+import java.util.*;
+public class Product 
+{
+	public static void main(String[] args)
+		{
+
+		ArrayList<String> al = new ArrayList<String>();
+		al.add("clothes");
+		al.add("bracelet");
+		al.add("facewash");
+		al.add("ankel");
+		al.add("phone");
+		Collections.sort(al);
+ 		for(String a: al)
+		{
+			System.out.println(a);
+		}
+			
+        }
+}
+OUTPUT:
+ankel
+bracelet
+clothes
+facewash
+phone
+
+

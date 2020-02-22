@@ -1,0 +1,217 @@
+QUERY 3.1
+1 SOL:
+ USING SUBQUERY:
+SQL> select staff_name, s.dept_code, staff_sal, s.dept_name from staff_master s, department_master d where s.dept_code=d.dept_code and s.staff_sal>20000;
+
+STAFF_NAME                                          DEPT_CODE  STAFF_SAL
+-------------------------------------------------- ---------- ----------
+DEPT_NAME
+--------------------
+vishal                                                      5      35000
+electrical
+
+Aruna                                                       4      25000
+civil
+
+Nandini                                                     6      65000
+mechanical
+
+USING JOINS:
+
+SQL> select staff_name, dept_code, staff_sal, dept_name from staff_master where staff_sal in (select staff_sal from staff_master group by staff_sal having (staff_sal)>20000);
+
+STAFF_NAME                                          DEPT_CODE  STAFF_SAL
+-------------------------------------------------- ---------- ----------
+DEPT_NAME
+--------------------
+Divya                                                       9      55000
+electronics
+
+Aruna                                                       5      25000
+civil
+
+Nandini                                                     6      65000
+mechanical
+
+2 SOL:
+ SQL> select s.staff_code as "staff#", s.staff_name as "staff", s.dept_name, s.mgr_no as "mgr#", s.mgr_name as "manager" from staff_master s, department_master d where s.dept_name=d.dept_name;
+
+    staff# staff
+---------- --------------------------------------------------
+DEPT_NAME                  mgr#
+-------------------- ----------
+manager
+--------------------------------------------------
+         2 vishal
+electronics          9515366113
+Sreeja
+  staff# staff
+---------- --------------------------------------------------
+DEPT_NAME                  mgr#
+-------------------- ----------
+manager
+--------------------------------------------------
+3 vidhya
+electrical           9441565162
+shraddha
+ staff# staff
+---------- --------------------------------------------------
+DEPT_NAME                  mgr#
+-------------------- ----------
+manager
+--------------------------------------------------
+4 nimisha
+civil                8074385369
+priyanka
+3 SOL:
+SQL> select b.student_code, b.student_name, b.book_code, b.book_name from book_transactions b, student_master s where b.student_code=s.student_code and b.book_actual_return_date='25-jan-2020';
+
+STUDENT_CODE STUDENT_NAME                                        BOOK_CODE
+------------ -------------------------------------------------- ----------
+BOOK_NAME
+--------------------------------------------------
+           2 Nishma                                                      1
+power systems
+
+           3 Akshitha                                                    2
+RAHE
+
+           4 Teja                                                        3
+STLD
+4 SOL:
+SQL> select s.staff_code, s.staff_name, b.book_code, b.book_name, b.book_issue_date, s.design_name, s.dept_name from staff_master s, book_transactions b where s.book_name=b.book_name and to_char(sysdate-s.book_issue_date)<30;
+
+STAFF_CODE STAFF_NAME                                          BOOK_CODE
+---------- -------------------------------------------------- ----------
+BOOK_NAME                                          BOOK_ISSU
+-------------------------------------------------- ---------
+DESIGN_NAME                                        DEPT_NAME
+-------------------------------------------------- --------------------
+         4 arman                                                       5
+MEFA                                               16-JAN-20
+manager                                            management
+
+         3 nishchala                                                   4
+HVE                                                20-JAN-20
+lecturer                                           electrical
+
+STAFF_CODE STAFF_NAME                                          BOOK_CODE
+---------- -------------------------------------------------- ----------
+BOOK_NAME                                          BOOK_ISSU
+-------------------------------------------------- ---------
+DESIGN_NAME                                        DEPT_NAME
+-------------------------------------------------- --------------------
+
+         2 nimisha                                                     3
+RAHE                                               02-JAN-20
+engineer                                           civil
+5 SOL:
+SQL> select s.staff_code, s.staff_name, s.design_name, s.dept_name, s.book_name, b.book_code, 5*(sysdate-b.book_expected_return_date) as FINE
+  2      from staff_master s,book_transactions b
+  3     where s.book_name = b.book_name;
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME                                        DEPT_NAME
+-------------------------------------------------- --------------------
+BOOK_NAME                                 BOOK_CODE       FINE
+---------------------------------------- ---------- ----------
+         4 arman
+manager                                            management
+MEFA                                              5 1792.38333
+
+         3 nishchala
+lecturer                                           electrical
+HVE                                               4 -7.6166667
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DESIGN_NAME                                        DEPT_NAME
+-------------------------------------------------- --------------------
+BOOK_NAME                                 BOOK_CODE       FINE
+---------------------------------------- ---------- ----------
+
+         2 nimisha
+engineer                                           civil
+RAHE                                              3 -22.616667
+6 SOL:
+SQL> select staff_code, staff_name, staff_sal from staff_master where staff_sal <any(select avg(staff_sal)from staff_master group by dept_code);
+
+STAFF_CODE STAFF_NAME                                          STAFF_SAL
+---------- -------------------------------------------------- ----------
+         3 Nischala                                                45000
+         4 Vamshi                                                  45000
+         5 Nimisha                                                 35000
+7 SOL:
+SQL>  select book_name, book_pub_author from book_master where no_of_books>1;
+
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+THE DREAMS
+Sreeja
+
+LIFE
+Sreeja
+
+REALME
+Rahul
+
+
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+THOUGHTS
+Rahul
+8 SOL:
+SQL>  select staff_code, staff_name, dept_name from staff_master where no_of_books>1;
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+         7 Shashidhar
+management
+
+         6 Siddharth
+electrical
+
+         5 Nimisha
+Civil
+9 SOL:
+1  SELECT STUDENT_CODE, STUDENT_NAME, DEPT_NAME
+  2  FROM STUDENT_MASTER
+  3* WHERE DEPT_CODE IN (SELECT DEPT_CODE FROM STUDENT_MASTER GROUP BY DEPT_CODE HAVING MAX(DEPT_CODE)>1)
+SQL> /
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+           3 Akshitha
+
+
+           7 Sathya
+management
+
+           2 Nishma
+
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+           4 Teja
+
+
+           3 Shristi
+electrical
+
+           2 Nikhila
+electrical
+
+
+6 rows selected.

@@ -1,0 +1,71 @@
+QUERIES 6.1
+1 SOL:
+SQL> insert into customermaster values
+  2      (
+  3      6000,'Jhons','#115Chicago','#115Chicago','M',25,7878776,10000);
+
+1 row created.
+
+Commit complete.
+SQL> insert into customermaster values (6001,'Jack','#116 France','#116 France','M',25,434524,20000);
+
+1 row created.
+
+Commit complete.
+
+SQL> insert into customermaster values (6002,'James','#114 New York','#114 New York','M',45,431525,15000.50);
+
+1 row created.
+
+Commit complete.
+2 SOL:
+SQL> savepoint SP1;
+
+Savepoint created.
+3 SOL:
+SQL> insert into customermaster values (6003,'Jhon','#114 Chicago','#114 Chicago','M',45,439525,19000.60);
+
+1 row created.
+
+Commit complete.
+4 SOL:
+SQL> savepoint SP1;
+
+Savepoint created.
+
+SQL> rollback to savepoint SP1;
+
+Rollback complete.
+
+SQL> select *from customermaster;
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO CUSTOMERSAL
+------------------------------ - ---------- ---------- -----------
+      1000 Allen                          #115Chicago
+#115Chicago                    M         25    7878776
+
+      1001 George                         #116 France
+#116 France                    M         25     434524
+
+      6002 James                          #114 New York
+#114 New York                  M         45     431525     15000.5
+
+
+CUSTOMERID CUSTOMERNAME                   ADDR1
+---------- ------------------------------ ------------------------------
+ADDR2                          G        AGE    PHONENO CUSTOMERSAL
+------------------------------ - ---------- ---------- -----------
+      6000 Jhons                          #115Chicago
+#115Chicago                    M         25    7878776       10000
+
+      6001 Jack                           #116 France
+#116 France                    M         25     434524       20000
+
+      6003 Jhon                           #114 Chicago
+#114 Chicago                   M         45     439525     19000.6
+
+
+6 rows selected.
+

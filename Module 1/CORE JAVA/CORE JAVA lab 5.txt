@@ -1,0 +1,136 @@
+5.1 SOL:
+(a)
+package com.cg.eis.bean ;
+
+import com.cg.eis.service.EmployeeService;
+
+public class Employee implements EmployeeService 
+{
+	private int id;
+	private String name;
+	private double salary;
+	private String designation;
+	private String insuranceScheme;
+
+	Employee(){}
+	
+	public Employee(String name, double salary, String designation)
+	{
+		this.name			= name;
+		this.salary			= salary;
+		this.designation	= designation;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public String getInsuranceScheme() {
+		return insuranceScheme;
+	}
+	public void setInsurancescheme(String insuranceScheme) {
+		this.insuranceScheme = insuranceScheme;
+	}
+	
+	public void insuranceScheme()
+	{
+		if((salary>5000)&&(salary<20000))
+		{
+			designation="System Associate";
+			System.out.println(insuranceScheme="Scheme C");
+			System.out.println(designation="System Associate");
+		}
+		else
+		{
+			if((salary>=20000)&&(salary<=40000))
+			{
+				designation="Programmer";
+				System.out.println(insuranceScheme="Scheme B");
+			}
+			else
+			{
+				if(salary>40000)
+				{
+					designation="Manager";
+					System.out.println(insuranceScheme="Scheme A");
+				}
+				else
+				{
+					if(salary<5000)
+					{
+						designation="Clerck";
+						System.out.println("No Scheme");
+					}
+				}
+			
+			}
+		}
+	}
+}
+(b)
+package com.cg.eis.service;
+
+public interface EmployeeService {
+public void insuranceScheme();
+}
+
+(c)
+package com.cg.eis.pl;
+
+import com.cg.eis.bean.*;
+import java.util.Scanner;
+
+public class EmpUser  
+{
+	public static void main(String[] args) 
+	{
+		Scanner obj = new Scanner(System.in);
+		
+		System.out.println("Enter the details");
+		String name = obj.next();
+		double salary = obj.nextDouble();
+		String designation = obj.next();
+
+		System.out.println("Employee details are");
+		System.out.println("Name : "+name);
+		System.out.println("Salary : "+salary);
+		System.out.println("Designation : "+designation);
+		
+		Employee me = new Employee(name,salary,designation);
+		me.insuranceScheme();
+		
+		obj.close();
+	}
+}
+
+OUTPUT:
+Enter the details
+Sreeja
+45000
+Manager
+Employee details are
+Name : Sreeja
+Salary : 45000.0
+Designation : Manager
+Scheme A
+
